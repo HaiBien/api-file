@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+  api:
+    image: "registry.thinklabs.com.vn:5000/bvphusanhaiphongapi:latest"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.labels.environment==development]
+      restart_policy:
+        condition: any
+    environment:
+      PORT: 3000
+      NODE_ENV: "production"
+      SERVICE_3000_NAME: "bvphusanhaiphongapi"
+      SERVICE_NAME: "bvphusanhaiphongapi"
+      SERVICE_TAGS: "bvphusanhaiphongapi"
+    ports:
+      - target: 3000
+        published: 4025
+        mode: host
